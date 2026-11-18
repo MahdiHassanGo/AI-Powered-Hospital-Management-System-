@@ -4,14 +4,14 @@ Full-stack **Bangladesh Specialized Hospital** management and patient portal fea
 
 ## Repository Structure
 
-- `L2B7-Project-PH-Healthcare-Backend/` — Express, TypeScript, Prisma (PostgreSQL + `pgvector`), Redis, LangChain / OpenRouter RAG Assistant, Nodemailer, Cloudinary, and bKash integration.
-- `PH-Healthcare-Nextjs/` — Next.js 16 (App Router), React 19, Tailwind CSS v4, TanStack Query, shadcn/ui, and interactive AI Chat Widget.
+- `healthcare-backend/` — Express, TypeScript, Prisma (PostgreSQL + `pgvector`), Redis, LangChain / OpenRouter RAG Assistant, Nodemailer, Cloudinary, and bKash integration.
+- `healthcare-frontend/` — Next.js 16 (App Router), React 19, Tailwind CSS v4, TanStack Query, shadcn/ui, and interactive AI Chat Widget.
 
 ## Quick Start
 
 ### 1. Backend
 ```bash
-cd L2B7-Project-PH-Healthcare-Backend
+cd healthcare-backend
 cp .env.example .env   # Fill in DATABASE_URL, REDIS_*, OPENROUTER_API_KEY, etc.
 bun install
 bunx prisma migrate deploy
@@ -22,7 +22,7 @@ bun run dev
 
 ### 2. Frontend
 ```bash
-cd PH-Healthcare-Nextjs
+cd healthcare-frontend
 bun install
 # Set NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api/v1 in .env.local
 bun run dev
