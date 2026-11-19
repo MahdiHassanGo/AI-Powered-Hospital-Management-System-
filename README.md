@@ -4,8 +4,21 @@ A full-stack healthcare management platform and patient portal for **Bangladesh 
 
 ---
 
+## 🌐 Live Deployed Application
+
+| Service | Live URL | Description |
+| --- | --- | --- |
+| **Frontend Web Portal** | [https://healthcare-frontend-production-3ce69b5c.up.railway.app](https://healthcare-frontend-production-3ce69b5c.up.railway.app) | Public portal, specialist search, doctor booking, and AI Medical Assistant |
+| **Backend REST API** | [https://healthcare-backend-production-9c03f7c4.up.railway.app](https://healthcare-backend-production-9c03f7c4.up.railway.app) | Express 5 + Prisma 7 + PostgreSQL (`pgvector`) + Redis |
+| **API Health Check** | [https://healthcare-backend-production-9c03f7c4.up.railway.app/](https://healthcare-backend-production-9c03f7c4.up.railway.app/) | Root health check (`{"success":true,"message":"..."}`) |
+| **Public Doctors API** | [https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1/doctor/public/all-doctors](https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1/doctor/public/all-doctors) | Public verified specialist catalog |
+| **Railway Project** | [Railway Project Dashboard](https://railway.com/project/4a52d4a0-79a0-4533-bb79-016696852882) | Full infrastructure: Frontend, Backend & Redis services |
+
+---
+
 ## Table of Contents
 
+- [Live Deployed Application](#-live-deployed-application)
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
 - [AI RAG Doctor-Finding Pipeline](#ai-rag-doctor-finding-pipeline)

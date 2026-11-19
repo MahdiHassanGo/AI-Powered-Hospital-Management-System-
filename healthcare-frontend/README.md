@@ -2,12 +2,23 @@
 
 Next.js 16 (App Router) patient, doctor, and admin portal for **Bangladesh Specialized Hospital**. Features a public marketing site, a searchable 34+ specialty doctor directory, live consultation slot booking with **bKash** checkout redirection, an interactive floating **AI RAG Medical Assistant (`ChatWidget`)**, Google OAuth & OTP authentication, and role-protected dashboards for **Patients**, **Doctors**, and **Admins**.
 
-**Core Stack:** Next.js 16.3 (App Router, Static Export) · React 19 (React Compiler) · TypeScript · Tailwind CSS v4 · shadcn/ui (`@base-ui/react`) · TanStack Query v5 · TanStack Form · Zod v4 · `ofetch` · `@react-oauth/google` · `lucide-react` · `date-fns` · Biome
+**Core Stack:** Next.js 16.3 (App Router) · React 19 (React Compiler) · TypeScript · Tailwind CSS v4 · shadcn/ui (`@base-ui/react`) · TanStack Query v5 · TanStack Form · Zod v4 · `ofetch` · `@react-oauth/google` · `lucide-react` · `date-fns` · Biome
+
+---
+
+## 🌐 Live Deployed Web App
+
+| Resource | Live Production URL | Notes |
+| --- | --- | --- |
+| **Live Web Portal** | [https://healthcare-frontend-production-3ce69b5c.up.railway.app](https://healthcare-frontend-production-3ce69b5c.up.railway.app) | Public site, dashboards, & AI chat |
+| **Connected Backend API** | [https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1](https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1) | Target `NEXT_PUBLIC_API_BASE_URL` |
+| **Railway Project** | [Railway Project Dashboard](https://railway.com/project/4a52d4a0-79a0-4533-bb79-016696852882) | Railway project `bangladesh-specialized-hospital` |
 
 ---
 
 ## Table of Contents
 
+- [Live Deployed Web App](#-live-deployed-web-app)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
@@ -235,18 +246,17 @@ Defined in `src/validation/`:
 
 ---
 
-## Static Export (`output: "export"`) & Production Builds
+## Production Builds & Deployment
 
-[`next.config.ts`](./next.config.ts) enables:
-- `reactCompiler: true` (via `babel-plugin-react-compiler`)
-- `output: "export"` (generates a static site in `out/`)
-
-Because `/doctors/[id]/page.tsx` implements `generateStaticParams()` by paginating `GET /doctor/public/all-doctors` at build time:
-1. Ensure `healthcare-backend` is running and seeded.
-2. Ensure `NEXT_PUBLIC_API_BASE_URL` is set in `.env.local` or your CI environment.
-3. Run `bun run build` so all doctor detail routes are statically pre-rendered.
-
-*(If the backend is unreachable during build, `generateStaticParams()` catches the error and returns `[]`, meaning individual doctor pages won't be pre-generated in the static export.)*
+- **Production Deployment (Railway — Active)**:
+  - Deployed in project **`bangladesh-specialized-hospital`** on Railway ([Dashboard](https://railway.com/project/4a52d4a0-79a0-4533-bb79-016696852882)).
+  - Build command: `bun install && bun run build`
+  - Start command: `bun run start` (starts the production Next.js server with dynamic and on-demand route handling)
+  - Public URL: [https://healthcare-frontend-production-3ce69b5c.up.railway.app](https://healthcare-frontend-production-3ce69b5c.up.railway.app)
+  - Automatically redeploys on pushes to `main` branch.
+- **Next.js Configuration (`next.config.ts`)**:
+  - `reactCompiler: true` (powered by `babel-plugin-react-compiler` for automatic memoization).
+  - Dynamic routes (`/doctors/[id]`) render on-demand and cache efficiently, connecting to `NEXT_PUBLIC_API_BASE_URL`.
 
 ---
 

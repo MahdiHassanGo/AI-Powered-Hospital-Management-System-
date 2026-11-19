@@ -6,8 +6,22 @@ REST API and AI RAG backend for the **Bangladesh Specialized Hospital** manageme
 
 ---
 
+## 🌐 Live Deployed API
+
+| Resource | Live Production URL | Notes |
+| --- | --- | --- |
+| **API Base URL** | `https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1` | All v1 routes mounted here |
+| **Health Check** | [https://healthcare-backend-production-9c03f7c4.up.railway.app/](https://healthcare-backend-production-9c03f7c4.up.railway.app/) | Root health endpoint |
+| **Public Doctors API** | [https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1/doctor/public/all-doctors](https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1/doctor/public/all-doctors) | Public specialist directory |
+| **AI RAG Chat Endpoint** | `POST https://healthcare-backend-production-9c03f7c4.up.railway.app/api/v1/chat` | LangChain + OpenRouter + `pgvector` assistant |
+| **Live Frontend App** | [https://healthcare-frontend-production-3ce69b5c.up.railway.app](https://healthcare-frontend-production-3ce69b5c.up.railway.app) | Connected client portal |
+| **Railway Project** | [Railway Project Dashboard](https://railway.com/project/4a52d4a0-79a0-4533-bb79-016696852882) | Railway project `bangladesh-specialized-hospital` |
+
+---
+
 ## Table of Contents
 
+- [Live Deployed API](#-live-deployed-api)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
@@ -490,6 +504,12 @@ API Testing: Import [`L2B7 Ph-Healthcare.postman_collection.json`](./L2B7%20Ph-H
 
 ## Build & Deployment
 
+- **Production Deployment (Railway — Active)**:
+  - Deployed in project **`bangladesh-specialized-hospital`** on Railway ([Dashboard](https://railway.com/project/4a52d4a0-79a0-4533-bb79-016696852882)).
+  - Build command: `bun install && bunx prisma generate && bun run build`
+  - Start command: `bun run start` (executes `node dist/server.js`)
+  - Connected to cloud Neon PostgreSQL (`pgvector` enabled) and private Railway Redis service (`redis.railway.internal:6379`).
+  - Automatically redeploys on pushes to `main` branch.
 - **Bundling**: `bun run build` runs `tsup` (`tsup.config.ts`), bundling `src/server.ts` into `dist/` (both ESM & CJS formats with sourcemaps and a `createRequire` banner shim for CJS dependencies).
 - **Vercel**: [`vercel.json`](./vercel.json) routes all requests (`/(.*)`) to `dist/server.js` using `@vercel/node`. Ensure all environment variables (including `DATABASE_URL`, `REDIS_*`, `OPENROUTER_*`, `FRONTEND_URL`, and `NODE_ENV=production`) are configured in the deployment environment.
 
