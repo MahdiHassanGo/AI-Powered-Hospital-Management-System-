@@ -14,7 +14,7 @@ import {
   seedTesterDoctor,
 } from "./app/utils/seed";
 
-const PORT = config.port;
+const PORT = config.port || 5000;
 
 const main = async () => {
   try {
@@ -24,12 +24,18 @@ const main = async () => {
     await redisClient.connect();
     console.log("Redis Connected Successfully.");
 
-    try {
-      await transporter.verify();
-      console.log("Nodemailer Connected Successfully.");
-    } catch (mailError: any) {
-      console.warn("⚠️  Nodemailer warning: Invalid SMTP credentials. Email sending will be disabled until valid credentials are set in .env.");
-    }
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+
+    transporter
+      .verify()
+      .then(() => console.log("Nodemailer Connected Successfully."))
+      .catch((mailError: any) =>
+        console.warn(
+          "⚠️  Nodemailer warning: Invalid SMTP credentials. Email sending will be disabled until valid credentials are set in .env.",
+        ),
+      );
 
     await seedSuperAdmin();
     await seedTesterAdmin();
@@ -37,10 +43,6 @@ const main = async () => {
     // await reindexAllDoctors();
     await deleteUnverifiedDoctors();
     await reindexDoctorEmbeddings();
-
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
   } catch (error) {
     console.error("Error starting the server:", error);
     await prisma.$disconnect();
