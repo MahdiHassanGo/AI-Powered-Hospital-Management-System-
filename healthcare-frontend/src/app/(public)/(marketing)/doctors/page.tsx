@@ -16,19 +16,19 @@ export default function DoctorsPage() {
   return (
     <div className="bg-slate-50/50 pb-16">
       {/* Directory Header Banner */}
-      <div className="border-b border-slate-800 bg-slate-900 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 lg:py-10">
-          <div className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-medium text-emerald-400">
+      <div className="border-b border-[#0f2c4d] bg-[#071c33] text-white">
+        <div className="mx-auto max-w-7xl px-4 py-10 lg:py-12">
+          <div className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-semibold text-emerald-400">
             <ShieldCheck className="size-3.5" />
-            BMDC-Verified Clinical Registry
+            BMDC-Verified Clinical Registry &bull; 210+ Consultants
           </div>
-          <h1 className="mt-2.5 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Specialist Directory
+          <h1 className="font-serif mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            Specialist Consultant Directory
           </h1>
-          <p className="mt-1 max-w-2xl text-xs text-slate-300 sm:text-sm">
-            Find consultants by clinical specialty, BMDC license, and years of
-            practice. View published consultation hours and book appointments
-            online.
+          <p className="mt-1.5 max-w-2xl text-xs text-slate-300 sm:text-sm">
+            Search verified senior physicians across 34 clinical specialties at
+            Bangladesh Specialized Hospital. Review BMDC credentials, degree
+            qualifications, and published consultation chamber slots.
           </p>
         </div>
       </div>

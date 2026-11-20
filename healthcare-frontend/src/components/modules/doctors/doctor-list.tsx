@@ -206,7 +206,7 @@ export default function PublicDoctorList() {
                 }}
                 className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
                   active
-                    ? "bg-slate-900 text-white"
+                    ? "bg-[#0A2647] text-white"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >

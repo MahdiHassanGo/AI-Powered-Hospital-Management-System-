@@ -1,130 +1,211 @@
 import {
   Activity,
   ArrowRight,
-  Baby,
   Bone,
   Brain,
-  Ear,
-  Eye,
+  Building2,
   HeartPulse,
-  Pill,
   ShieldPlus,
-  Sparkles,
   Stethoscope,
   Wind,
 } from "lucide-react";
 import Link from "next/link";
 
-const DEPARTMENTS = [
+const INSTITUTES = [
   {
-    name: "Cardiology",
-    description: "Heart diseases, hypertension, coronary evaluation & ECG care",
+    title: "Institute of Cardiac Sciences & CCU",
+    dept: "Cardiology",
+    scope:
+      "Interventional Cath Lab, Coronary Angiogram, Stenting, Pacemakers, Echocardiogram & 24/7 CCU.",
+    procedures: [
+      "Coronary Angiogram",
+      "Primary Angioplasty (PCI)",
+      "Echocardiography",
+      "24/7 CCU",
+    ],
+    consultantCount: "18+ Specialists",
     icon: HeartPulse,
   },
   {
-    name: "Dermatology",
-    description:
-      "Skin conditions, allergies, eczema, psoriasis & clinical care",
-    icon: Sparkles,
-  },
-  {
-    name: "Neurology",
-    description: "Migraine, stroke, neuropathies & central nervous disorders",
+    title: "Neurosciences & Comprehensive Stroke Center",
+    dept: "Neurology",
+    scope:
+      "Stroke thrombolysis, Brain trauma, Microsurgical tumor resection, Epilepsy, Migraine & Neuro-ICU.",
+    procedures: [
+      "Acute Stroke Care",
+      "Neurosurgery",
+      "Electromyography (EMG)",
+      "Neuro-ICU",
+    ],
+    consultantCount: "14+ Specialists",
     icon: Brain,
   },
   {
-    name: "Orthopedics",
-    description: "Joint disorders, trauma surgery, arthritis & spine care",
+    title: "Orthopedics & Joint Replacement Center",
+    dept: "Orthopedics",
+    scope:
+      "Total Knee & Hip Arthroplasty, Arthroscopic ACL surgery, Complex fracture fixation & Spine surgery.",
+    procedures: [
+      "Total Knee Replacement",
+      "Total Hip Arthroplasty",
+      "Spine Reconstruction",
+      "Trauma Fixation",
+    ],
+    consultantCount: "16+ Specialists",
     icon: Bone,
   },
   {
-    name: "Pediatrics",
-    description: "Infant growth, adolescent health, vaccinations & pediatrics",
-    icon: Baby,
-  },
-  {
-    name: "Gynecology",
-    description: "Obstetric care, maternal medicine & gynecological health",
-    icon: ShieldPlus,
-  },
-  {
-    name: "Gastroenterology",
-    description: "Digestive health, hepatic conditions, endoscopy & colon care",
+    title: "Gastroenterology, Hepatology & Endoscopy",
+    dept: "Gastroenterology",
+    scope:
+      "Therapeutic Upper GI Endoscopy, Colonoscopy, ERCP for bile duct stones, Liver cirrhosis & GI bleeding.",
+    procedures: [
+      "Diagnostic & Therapeutic Endoscopy",
+      "Colonoscopy",
+      "ERCP",
+      "Liver Clinic",
+    ],
+    consultantCount: "12+ Specialists",
     icon: Activity,
   },
   {
-    name: "Ophthalmology",
-    description: "Cataracts, retina disorders, glaucoma & diagnostic vision",
-    icon: Eye,
+    title: "Mother & Child Care Institute",
+    dept: "Gynecology",
+    scope:
+      "High-risk obstetric management, Normal & Cesarean deliveries, Level-III Neonatal ICU (NICU) & Pediatrics.",
+    procedures: [
+      "Maternal-Fetal Medicine",
+      "Laparoscopic Hysterectomy",
+      "Level-III NICU",
+      "Pediatric Surgery",
+    ],
+    consultantCount: "22+ Specialists",
+    icon: ShieldPlus,
   },
   {
-    name: "ENT",
-    description: "Ear disorders, sinusitis, laryngology & hearing evaluation",
-    icon: Ear,
+    title: "Nephrology, Dialysis & Kidney Health",
+    dept: "Nephrology",
+    scope:
+      "24-Hour Automated Hemodialysis unit, Acute kidney injury management, Glomerulonephritis & Renal biopsy.",
+    procedures: [
+      "24/7 Hemodialysis",
+      "Kidney Biopsy",
+      "AV Fistula Care",
+      "Hypertension Clinic",
+    ],
+    consultantCount: "10+ Specialists",
+    icon: Building2,
   },
   {
-    name: "Pulmonology",
-    description: "Asthma, respiratory infections, COPD & thoracic evaluation",
+    title: "Pulmonology, Thoracic & Critical Care",
+    dept: "Pulmonology",
+    scope:
+      "30-Bed Critical Care ICU, Mechanical ventilation, Video Bronchoscopy, Chronic Asthma & COPD management.",
+    procedures: [
+      "Video Bronchoscopy",
+      "Invasive Mechanical Ventilation",
+      "Thoracic Drainage",
+      "Sleep Apnea",
+    ],
+    consultantCount: "9+ Specialists",
     icon: Wind,
   },
   {
-    name: "Endocrinology",
-    description: "Diabetes mellitus, thyroid management & metabolic health",
-    icon: Pill,
-  },
-  {
-    name: "Internal Medicine",
-    description: "Comprehensive adult medical diagnosis & chronic management",
+    title: "Internal Medicine & Adult Care",
+    dept: "Internal Medicine",
+    scope:
+      "Complex multi-system diseases, Unexplained fevers, Comprehensive adult diagnostics & Chronic disease care.",
+    procedures: [
+      "Executive Health Screening",
+      "Diabetes Management",
+      "Infectious Disease",
+      "Geriatric Care",
+    ],
+    consultantCount: "25+ Specialists",
     icon: Stethoscope,
   },
 ];
 
 export default function DepartmentsSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
-      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-        <div className="space-y-1">
-          <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
-            Clinical Units
+    <section className="mx-auto max-w-7xl px-4 py-14 lg:py-20">
+      <div className="flex flex-col justify-between gap-4 border-b border-slate-200 pb-5 sm:flex-row sm:items-end">
+        <div className="space-y-1.5">
+          <p className="text-xs font-bold tracking-widest text-slate-500 uppercase">
+            Clinical Centers of Excellence
           </p>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Departments &amp; Specialties
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            Specialized Medical Institutes &amp; Clinical Departments
           </h2>
           <p className="max-w-2xl text-xs text-slate-600 sm:text-sm">
-            Select a specialty to view consultant profiles, BMDC licenses, and
-            current consultation schedules.
+            Bangladesh Specialized Hospital comprises 34 specialized departments
+            organized under comprehensive clinical institutes with integrated
+            chambers, diagnostics, and surgical facilities.
           </p>
         </div>
         <Link
           href="/doctors"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 hover:text-teal-700"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A2647] hover:underline"
         >
-          View all 34 departments
-          <ArrowRight className="size-3.5" />
+          View all 34 departments &rarr;
         </Link>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {DEPARTMENTS.map((dept) => {
-          const Icon = dept.icon;
+      <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {INSTITUTES.map((institute) => {
+          const Icon = institute.icon;
           return (
-            <Link
-              key={dept.name}
-              href={`/doctors?specialization=${encodeURIComponent(dept.name)}`}
-              className="group flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 transition-colors hover:border-slate-400 hover:bg-slate-50/50"
+            <div
+              key={institute.title}
+              className="flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-5 shadow-xs transition-shadow hover:shadow-md"
             >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700 transition-colors group-hover:bg-slate-900 group-hover:text-white">
-                <Icon className="size-4.5" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-900">
-                  {dept.name}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex size-10 items-center justify-center rounded-md bg-[#0A2647]/10 text-[#0A2647]">
+                    <Icon className="size-5" />
+                  </div>
+                  <span className="font-mono text-[11px] font-semibold text-slate-500">
+                    {institute.consultantCount}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-base font-bold text-slate-900 leading-snug">
+                  {institute.title}
                 </h3>
-                <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
-                  {dept.description}
+
+                <p className="text-xs leading-relaxed text-slate-600">
+                  {institute.scope}
                 </p>
+
+                {/* Key Clinical Procedures */}
+                <div className="space-y-1 border-t border-slate-100 pt-3">
+                  <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                    Procedures &amp; Units
+                  </p>
+                  <ul className="grid grid-cols-2 gap-1 text-[11px] text-slate-700">
+                    {institute.procedures.map((proc) => (
+                      <li
+                        key={proc}
+                        className="flex items-center gap-1 truncate"
+                      >
+                        <span className="size-1 rounded-full bg-slate-400" />
+                        <span className="truncate">{proc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </Link>
+
+              <div className="mt-5 border-t border-slate-100 pt-3">
+                <Link
+                  href={`/doctors?specialization=${encodeURIComponent(institute.dept)}`}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#0A2647] hover:underline"
+                >
+                  View Specialists &amp; Chamber Hours
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            </div>
           );
         })}
       </div>

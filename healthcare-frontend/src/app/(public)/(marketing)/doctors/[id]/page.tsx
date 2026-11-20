@@ -98,19 +98,19 @@ export default async function DoctorDetailPage({
         </Button>
 
         {/* Doctor Clinical Profile Card */}
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
+        <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs">
           {/* Header Banner */}
-          <div className="border-b border-slate-800 bg-slate-900 p-6 text-white sm:p-8">
+          <div className="border-b border-[#0f2c4d] bg-[#071c33] p-6 text-white sm:p-8">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-              <div className="flex size-16 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 font-mono text-xl font-bold text-white">
+              <div className="flex size-16 shrink-0 items-center justify-center rounded-md border border-slate-700 bg-[#0A2647] font-mono text-xl font-bold text-white">
                 {getInitials(doctor.name)}
               </div>
               <div className="flex-1 space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+                  <h1 className="font-serif text-xl font-bold tracking-tight text-white sm:text-2xl">
                     {doctor.name}
                   </h1>
-                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-300">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/20 px-2 py-0.5 text-xs font-semibold text-emerald-300">
                     <CheckCircle2 className="size-3" />
                     BMDC Verified
                   </span>
@@ -120,11 +120,11 @@ export default async function DoctorDetailPage({
                   {doctor.specialization} &bull; Bangladesh Specialized Hospital
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-800/60 px-4 py-2.5 text-left sm:text-right">
-                <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+              <div className="rounded-md border border-slate-700 bg-slate-800/80 px-4 py-2.5 text-left sm:text-right">
+                <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
                   Consultation Fee
                 </p>
-                <p className="font-mono text-xl font-bold tabular-nums text-white">
+                <p className="font-mono text-lg font-bold tabular-nums text-white">
                   {fee}
                 </p>
               </div>

@@ -50,21 +50,22 @@ export default function AboutUsPage() {
   return (
     <div className="bg-white">
       {/* Banner */}
-      <section className="border-b border-slate-800 bg-slate-900 text-white">
+      <section className="border-b border-[#0f2c4d] bg-[#071c33] text-white">
         <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
           <div className="max-w-3xl space-y-3">
-            <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-medium text-emerald-400">
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-semibold text-emerald-400">
               <ShieldCheck className="size-3.5" />
-              Bangladesh Specialized Hospital &bull; Shyamoli, Dhaka
+              Bangladesh Specialized Hospital &bull; Shyamoli, Mirpur Road,
+              Dhaka
             </span>
-            <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
-              Tertiary Clinical Excellence &amp; Specialist Care
+            <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              Tertiary Clinical Excellence &amp; Patient-First Medicine
             </h1>
             <p className="text-xs leading-relaxed text-slate-300 sm:text-sm">
-              Bangladesh Specialized Hospital is a modern tertiary healthcare
-              facility in Dhaka offering multi-disciplinary inpatient,
-              outpatient, and diagnostic services staffed by BMDC-registered
-              consultants.
+              Established as Dhaka&apos;s center of clinical excellence,
+              Bangladesh Specialized Hospital delivers integrated
+              multi-disciplinary care across 34 specialties, 10+ modular
+              operation theaters, and round-the-clock emergency trauma support.
             </p>
           </div>
         </div>
