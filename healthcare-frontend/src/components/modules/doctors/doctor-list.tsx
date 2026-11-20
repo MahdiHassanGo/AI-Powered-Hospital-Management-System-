@@ -122,11 +122,11 @@ export default function PublicDoctorList() {
   return (
     <div className="space-y-5">
       {/* Search & Filter Control Bar */}
-      <div className="border border-black/10 bg-white p-5">
+      <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
         <div className="grid gap-3 md:grid-cols-12">
           {/* Search Input */}
           <div className="relative md:col-span-5">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-black/40" />
+            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
             <Input
               type="text"
               value={searchInput}
@@ -135,13 +135,13 @@ export default function PublicDoctorList() {
                 setPage(1);
               }}
               placeholder="Search by physician name, degree, or specialty..."
-              className="h-10 pl-9 text-xs rounded-none border-black/20 focus-visible:ring-black"
+              className="h-9 pl-9 text-xs"
             />
           </div>
 
           {/* Specialization Select */}
           <div className="relative md:col-span-4">
-            <Stethoscope className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-black/40" />
+            <Stethoscope className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
             <select
               aria-label="Filter by specialization"
               value={specialization}
@@ -149,7 +149,7 @@ export default function PublicDoctorList() {
                 setSpecialization(e.target.value);
                 setPage(1);
               }}
-              className="h-10 w-full rounded-none border border-black/20 bg-white pr-3 pl-9 text-xs text-black outline-none focus:border-black"
+              className="h-9 w-full rounded-md border border-input bg-background pr-3 pl-9 text-xs text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/40"
             >
               {SPECIALIZATIONS.map((spec) => (
                 <option
@@ -164,7 +164,7 @@ export default function PublicDoctorList() {
 
           {/* Sort Select */}
           <div className="relative md:col-span-3">
-            <SlidersHorizontal className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-black/40" />
+            <SlidersHorizontal className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
             <select
               aria-label="Sort doctors"
               value={sortOption}
@@ -172,7 +172,7 @@ export default function PublicDoctorList() {
                 setSortOption(e.target.value as SortOption);
                 setPage(1);
               }}
-              className="h-10 w-full rounded-none border border-black/20 bg-white pr-3 pl-9 text-xs text-black outline-none focus:border-black"
+              className="h-9 w-full rounded-md border border-input bg-background pr-3 pl-9 text-xs text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/40"
             >
               {Object.entries(SORT_MAP).map(([key, item]) => (
                 <option key={key} value={key}>
@@ -184,7 +184,7 @@ export default function PublicDoctorList() {
         </div>
 
         {/* Quick Filter Chips */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-black/10 pt-4">
+        <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-3">
           {[
             "Cardiology",
             "Dermatology",
@@ -204,10 +204,10 @@ export default function PublicDoctorList() {
                   setSpecialization(active ? "" : spec);
                   setPage(1);
                 }}
-                className={`rounded-full px-3 py-1 text-xs font-medium tracking-wide transition-colors ${
+                className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
                   active
-                    ? "bg-black text-white"
-                    : "border border-black/20 text-black hover:border-black"
+                    ? "bg-[#0A2647] text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
                 {spec}
@@ -219,7 +219,7 @@ export default function PublicDoctorList() {
             <button
               type="button"
               onClick={clearFilters}
-              className="ml-auto inline-flex items-center gap-1 text-xs font-medium tracking-wide uppercase text-black/60 hover:text-black"
+              className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50"
             >
               <X className="size-3.5" />
               Reset filters

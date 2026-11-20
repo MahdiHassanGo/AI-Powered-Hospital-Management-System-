@@ -98,22 +98,22 @@ export default function DoctorBooking({ doctorId }: { doctorId: string }) {
         {schedules.map((schedule) => (
           <div
             key={schedule.id}
-            className="flex flex-wrap items-center justify-between gap-3 border border-black/10 bg-white p-4 transition-colors hover:border-black"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50/50 p-3.5 transition-colors hover:border-slate-300 hover:bg-white"
           >
             <div className="flex flex-wrap items-center gap-4 text-xs">
-              <div className="flex items-center gap-1.5 font-semibold text-black">
-                <Calendar className="size-3.5 text-black/50" />
+              <div className="flex items-center gap-1.5 font-semibold text-slate-900">
+                <Calendar className="size-3.5 text-slate-500" />
                 <span>{format(schedule.startDateTime, "eeee, PP")}</span>
               </div>
-              <div className="flex items-center gap-1.5 font-mono tabular-nums text-black/70">
-                <Clock className="size-3.5 text-black/40" />
+              <div className="flex items-center gap-1.5 font-mono tabular-nums text-slate-600">
+                <Clock className="size-3.5 text-slate-400" />
                 <span>
                   {format(schedule.startDateTime, "p")} &ndash;{" "}
                   {format(schedule.endDateTime, "p")}
                 </span>
               </div>
               {schedule.availableSlots != null && (
-                <div className="inline-flex items-center gap-1 border border-black/20 px-2 py-0.5 font-mono text-[11px] font-medium tabular-nums text-black">
+                <div className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 font-mono text-[11px] font-medium tabular-nums text-emerald-800">
                   <Users className="size-3" />
                   {schedule.availableSlots} slots left
                 </div>
@@ -123,7 +123,6 @@ export default function DoctorBooking({ doctorId }: { doctorId: string }) {
               size="sm"
               disabled={bookingPending}
               onClick={() => handleBooking(schedule)}
-              className="rounded-full border border-black bg-black text-white hover:bg-transparent hover:text-black transition-colors px-5 text-xs tracking-wider uppercase"
             >
               {bookingPending ? "Reserving..." : "Book Slot"}
             </Button>

@@ -1,10 +1,22 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { LayoutDashboard, LogOut, Menu, X } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  LayoutDashboard,
+  LogOut,
+  MapPin,
+  Menu,
+  PhoneCall,
+  Search,
+  Stethoscope,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Logo from "@/assets/svg/Logo";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { useGetMe, useLogout } from "@/hooks";
@@ -16,8 +28,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const routes = [
-    { name: "Consultants", url: "/doctors" },
-    { name: "About", url: "/about-us" },
+    { name: "Hospital Home", url: "/" },
+    { name: "Find a Doctor", url: "/doctors" },
+    { name: "Clinical Specialties", url: "/doctors?specialization=" },
+    { name: "About Hospital", url: "/about-us" },
   ];
 
   const dashboardRoute: Record<UserRole, string> = {
@@ -55,27 +69,84 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-6 sm:px-12 lg:px-16">
-        {/* Studio / Hospital Name Top-Left */}
+    <header className="sticky top-0 z-30 w-full border-b border-slate-200 bg-white shadow-xs">
+      {/* Top Clinical & Emergency Desk Bar */}
+      <div className="border-b border-[#0f2c4d] bg-[#071c33] text-slate-200">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-2 text-xs">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-400">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+              </span>
+              <PhoneCall className="size-3.5" />
+              24/7 Emergency &amp; Ambulance Hotline:{" "}
+              <a
+                href="tel:10633"
+                className="font-mono text-sm font-bold tracking-wider text-white underline underline-offset-2"
+              >
+                10633
+              </a>
+            </span>
+            <span className="hidden items-center gap-1.5 text-slate-300 sm:inline-flex">
+              <MapPin className="size-3.5 text-slate-400" />
+              21 Shyamoli, Mirpur Road, Dhaka-1207
+            </span>
+            <span className="hidden items-center gap-1.5 text-slate-300 md:inline-flex">
+              <Clock className="size-3.5 text-slate-400" />
+              Level-1 Trauma, CCU &amp; Diagnostics Open 24 Hours
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Link
+              href="/apply"
+              className="inline-flex items-center gap-1 text-slate-300 transition-colors hover:text-white"
+            >
+              <Stethoscope className="size-3.5 text-teal-400" />
+              Join Medical Panel
+            </Link>
+            <span className="text-slate-600">|</span>
+            <span className="font-mono text-[11px] text-slate-400">
+              BMDC Registered
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Hospital Navigation Header */}
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4">
         <Link
           href="/"
-          className="text-xs font-semibold tracking-[0.12em] uppercase text-black transition-opacity hover:opacity-70"
+          className="flex items-center gap-3.5 transition-opacity hover:opacity-95"
         >
-          Bangladesh Specialized Hospital
+          <Logo />
+          <div className="flex flex-col">
+            <span className="font-serif text-lg font-bold tracking-tight text-slate-950 sm:text-xl leading-tight">
+              Bangladesh Specialized Hospital
+            </span>
+            <span className="text-[11px] font-medium tracking-wide text-slate-500 uppercase">
+              Tertiary Medical Center &bull; Center of Excellence &bull; Dhaka
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-1 lg:flex">
           {routes.map((route) => {
-            const isActive = pathname.startsWith(route.url);
+            const isActive =
+              route.url === "/"
+                ? pathname === "/"
+                : pathname.startsWith(route.url);
             return (
               <Link
                 key={route.name}
                 href={route.url}
                 className={cn(
-                  "text-xs tracking-[0.12em] uppercase transition-colors hover:text-black",
-                  isActive ? "font-bold text-black" : "text-black/60",
+                  "rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
+                  isActive
+                    ? "bg-slate-100 font-semibold text-slate-950"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-slate-950",
                 )}
               >
                 {route.name}
@@ -86,52 +157,75 @@ export default function Header() {
           {role && (
             <Link
               href={dashboardRoute[role]}
-              className="inline-flex items-center gap-1.5 text-xs tracking-[0.12em] uppercase text-black/60 hover:text-black"
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
+                pathname.startsWith(dashboardRoute[role])
+                  ? "bg-slate-100 font-semibold text-slate-950"
+                  : "text-slate-700 hover:bg-slate-50 hover:text-slate-950",
+              )}
             >
-              <LayoutDashboard className="size-3.5" />
-              Portal
-            </Link>
-          )}
-
-          {!isLoading && !data && (
-            <Link
-              href="/login"
-              className="text-xs tracking-[0.12em] uppercase text-black/60 hover:text-black"
-            >
-              Login
+              <LayoutDashboard className="size-4" />
+              Patient Portal
             </Link>
           )}
         </nav>
 
-        {/* Work with us pill button */}
-        <div className="hidden items-center gap-3 md:flex">
-          {!isLoading && !data ? (
-            <Link
-              href="/doctors"
-              className="inline-flex items-center justify-center rounded-full border border-black bg-transparent px-7 py-3 text-xs font-medium tracking-[0.12em] uppercase text-black transition-colors duration-200 hover:bg-black hover:text-white"
-            >
-              Work with us
-            </Link>
-          ) : (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              size="sm"
-              className="rounded-full border-black text-xs tracking-[0.12em] uppercase"
-            >
-              <LogOut className="size-3.5" />
+        {/* Desktop Direct Actions */}
+        <div className="hidden items-center gap-2.5 sm:flex">
+          <Button
+            variant="outline"
+            size="sm"
+            render={
+              <Link href="/doctors" className="flex items-center gap-1.5">
+                <Search className="size-3.5" />
+                Search Doctors
+              </Link>
+            }
+            nativeButton={false}
+          >
+            Search Doctors
+          </Button>
+
+          {!isLoading && !data && (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                render={<Link href="/login">Portal Login</Link>}
+                nativeButton={false}
+              >
+                Portal Login
+              </Button>
+              <Button
+                size="sm"
+                className="bg-[#0A2647] text-white hover:bg-[#071c33]"
+                render={
+                  <Link href="/doctors" className="flex items-center gap-1.5">
+                    <Calendar className="size-3.5" />
+                    Book Appointment
+                  </Link>
+                }
+                nativeButton={false}
+              >
+                Book Appointment
+              </Button>
+            </>
+          )}
+          {!isLoading && data && (
+            <Button onClick={handleLogout} variant="outline" size="sm">
+              <LogOut className="size-4" />
               Sign Out
             </Button>
           )}
         </div>
 
-        {/* Mobile menu trigger */}
+        {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden text-black"
-          aria-label="Toggle navigation"
-          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="lg:hidden"
+          aria-label="Toggle navigation menu"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
         >
           {mobileMenuOpen ? (
             <X className="size-5" />
@@ -141,46 +235,86 @@ export default function Header() {
         </Button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile Navigation Panel */}
       {mobileMenuOpen && (
-        <div className="border-t border-black/10 bg-white px-6 py-6 md:hidden">
-          <nav className="flex flex-col gap-4">
-            {routes.map((route) => (
-              <Link
-                key={route.name}
-                href={route.url}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-medium tracking-[0.12em] uppercase text-black"
-              >
-                {route.name}
-              </Link>
-            ))}
+        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg lg:hidden">
+          <nav className="flex flex-col gap-1">
+            {routes.map((route) => {
+              const isActive =
+                route.url === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(route.url);
+              return (
+                <Link
+                  key={route.name}
+                  href={route.url}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-sm font-medium",
+                    isActive
+                      ? "bg-slate-100 font-semibold text-slate-950"
+                      : "text-slate-700 hover:bg-slate-50",
+                  )}
+                >
+                  {route.name}
+                </Link>
+              );
+            })}
             {role && (
               <Link
                 href={dashboardRoute[role]}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-medium tracking-[0.12em] uppercase text-black"
+                className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Portal Dashboard
+                Patient Portal Dashboard
               </Link>
             )}
-            {!isLoading && !data && (
-              <Link
-                href="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-medium tracking-[0.12em] uppercase text-black"
-              >
-                Portal Login
-              </Link>
-            )}
-            <Link
-              href="/doctors"
-              onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-full border border-black bg-black py-3 text-center text-xs font-medium tracking-[0.12em] uppercase text-white"
-            >
-              Work with us
-            </Link>
           </nav>
+
+          <div className="mt-4 flex flex-col gap-2 border-t border-slate-100 pt-4">
+            {!isLoading && !data && (
+              <>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  render={
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Portal Login
+                    </Link>
+                  }
+                  nativeButton={false}
+                >
+                  Portal Login
+                </Button>
+                <Button
+                  className="w-full bg-[#0A2647] text-white hover:bg-[#071c33]"
+                  render={
+                    <Link
+                      href="/doctors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Book Appointment
+                    </Link>
+                  }
+                  nativeButton={false}
+                >
+                  Book Appointment
+                </Button>
+              </>
+            )}
+            {!isLoading && data && (
+              <Button
+                onClick={handleLogout}
+                variant="destructive"
+                className="w-full"
+              >
+                Sign Out
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </header>
