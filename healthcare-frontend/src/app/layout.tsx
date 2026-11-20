@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Merriweather } from "next/font/google";
+import { Fraunces, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { cn } from "@/lib/utils";
@@ -7,15 +7,9 @@ import Providers from "@/providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-const merriweather = Merriweather({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
-  variable: "--font-serif",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: "--font-fraunces",
 });
 
 const geistMono = Geist_Mono({
@@ -25,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bangladesh Specialized Hospital — Center of Medical Excellence",
+    default: "Bangladesh Specialized Hospital — Precision in Care",
     template: "%s | Bangladesh Specialized Hospital",
   },
   description:
@@ -39,15 +33,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
         inter.variable,
-        merriweather.variable,
+        fraunces.variable,
+        geistMono.variable,
         "font-sans",
       )}
     >
       <Providers>
-        <body className="min-h-full flex flex-col bg-[#FAFBFB] text-slate-900">
+        <body className="min-h-full flex flex-col bg-[#FFFFFF] text-[#000000]">
           {children}
           <Toaster />
         </body>

@@ -1,4 +1,3 @@
-import { ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ChatWidget from "@/components/modules/chat/chat-widget";
@@ -7,34 +6,33 @@ import PublicDoctorList, {
 } from "@/components/modules/doctors/doctor-list";
 
 export const metadata: Metadata = {
-  title: "Specialist Doctors Directory",
+  title: "Specialist Consultant Directory",
   description:
     "Consult 200+ BMDC-verified specialist physicians across 34 clinical departments at Bangladesh Specialized Hospital, Dhaka.",
 };
 
 export default function DoctorsPage() {
   return (
-    <div className="bg-slate-50/50 pb-16">
+    <div className="bg-white text-black min-h-screen pb-24">
       {/* Directory Header Banner */}
-      <div className="border-b border-[#0f2c4d] bg-[#071c33] text-white">
-        <div className="mx-auto max-w-7xl px-4 py-10 lg:py-12">
-          <div className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-semibold text-emerald-400">
-            <ShieldCheck className="size-3.5" />
-            BMDC-Verified Clinical Registry &bull; 210+ Consultants
-          </div>
-          <h1 className="font-serif mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Specialist Consultant Directory
+      <div className="border-b border-black">
+        <div className="mx-auto max-w-[1280px] px-6 py-16 sm:px-12 sm:py-24 lg:px-16">
+          <p className="text-xs font-semibold tracking-[0.14em] uppercase text-black/60 mb-4">
+            BMDC Verified Medical Panel &bull; 210+ Consultants
+          </p>
+          <h1 className="font-serif text-[clamp(44px,7vw,96px)] font-bold tracking-[-0.02em] leading-none text-black">
+            Consultant Directory
           </h1>
-          <p className="mt-1.5 max-w-2xl text-xs text-slate-300 sm:text-sm">
-            Search verified senior physicians across 34 clinical specialties at
-            Bangladesh Specialized Hospital. Review BMDC credentials, degree
-            qualifications, and published consultation chamber slots.
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
+            Search verified senior physicians across 34 clinical specialties.
+            Review credentials, degrees, and published chamber consultation
+            slots.
           </p>
         </div>
       </div>
 
       {/* Main Directory Table / Grid */}
-      <section className="mx-auto max-w-7xl px-4 pt-6">
+      <section className="mx-auto max-w-[1280px] px-6 pt-12 sm:px-12 lg:px-16">
         <Suspense fallback={<PublicDoctorListLoading />}>
           <PublicDoctorList />
         </Suspense>

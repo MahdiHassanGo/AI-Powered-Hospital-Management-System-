@@ -133,7 +133,7 @@ export default function ChatWidget() {
       <Button
         ref={triggerRef}
         size="icon"
-        className="fixed right-5 bottom-5 z-40 size-12 rounded-xl border border-slate-700 bg-slate-900 text-white shadow-md transition-colors hover:bg-slate-800"
+        className="fixed right-6 bottom-6 z-40 size-12 rounded-full border border-black bg-black text-white transition-colors hover:bg-white hover:text-black shadow-md"
         aria-label={
           isOpen ? "Close clinical triage" : "Open hospital clinical triage"
         }
@@ -153,19 +153,19 @@ export default function ChatWidget() {
           id="healthcare-chat-panel"
           role="dialog"
           aria-label="Bangladesh Specialized Hospital Triage Assistant"
-          className="fixed right-5 bottom-20 z-40 flex h-[min(34rem,calc(100dvh-6rem))] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-xl border border-slate-300 bg-white text-xs text-slate-900 shadow-xl"
+          className="fixed right-6 bottom-22 z-40 flex h-[min(34rem,calc(100dvh-7rem))] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden border border-black bg-white text-xs text-black shadow-2xl"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-200 bg-slate-900 px-4 py-3 text-white">
+          <div className="flex items-center justify-between border-b border-black bg-black px-4 py-3 text-white">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-emerald-500/20 text-emerald-400">
-                <Stethoscope className="size-4" />
+              <div className="flex size-7 shrink-0 items-center justify-center border border-white/20 text-white font-mono text-[10px]">
+                BSH
               </div>
               <div className="min-w-0">
-                <p className="truncate font-semibold text-xs text-white">
-                  BSH Triage Assistant
+                <p className="truncate font-semibold text-xs tracking-wider uppercase text-white">
+                  Triage Assistant
                 </p>
-                <p className="truncate text-[10px] text-slate-300">
+                <p className="truncate text-[10px] text-white/60">
                   Department &amp; specialist matching
                 </p>
               </div>
@@ -173,7 +173,7 @@ export default function ChatWidget() {
             <Button
               variant="ghost"
               size="icon-xs"
-              className="text-slate-300 hover:bg-slate-800 hover:text-white"
+              className="text-white hover:bg-white/10"
               aria-label="Close triage"
               onClick={closeChat}
             >
