@@ -1,4 +1,10 @@
 import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import {
   applyAsDoctor,
   approveDoctor,
   getAllDoctors,
@@ -7,13 +13,7 @@ import {
   getTodayScheduleByDoctor,
   verifyDoctorAccount,
 } from "@/api";
-import { DoctorParams, PublicDoctorParams } from "@/types";
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import type { DoctorParams, PublicDoctorParams } from "@/types";
 
 export function useApplyAsDoctor() {
   return useMutation({

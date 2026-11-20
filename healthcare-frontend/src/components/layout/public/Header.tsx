@@ -27,8 +27,8 @@ export default function Header() {
 
   const routes = [
     { name: "Home", url: "/" },
-    { name: "Doctors", url: "/doctors" },
-    { name: "About Us", url: "/about-us" },
+    { name: "Specialist Directory", url: "/doctors" },
+    { name: "About Hospital", url: "/about-us" },
   ];
 
   const dashboardRoute: Record<UserRole, string> = {
@@ -48,8 +48,8 @@ export default function Header() {
     logout(undefined, {
       onSuccess: () => {
         toast.add({
-          title: "Logged out",
-          description: "You have been signed out successfully.",
+          title: "Signed out",
+          description: "You have signed out of your portal session.",
           type: "success",
         });
         queryClient.removeQueries({ queryKey: ["user"] });
@@ -57,8 +57,8 @@ export default function Header() {
       },
       onError: () => {
         toast.add({
-          title: "Logout failed",
-          description: "Something went wrong. Please try again.",
+          title: "Sign out failed",
+          description: "Could not end session. Please try again.",
           type: "error",
         });
       },
@@ -66,52 +66,59 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-30 w-full border-b bg-white/95 backdrop-blur-md">
-      {/* Top hospital emergency & utility bar */}
-      <div className="bg-slate-900 text-slate-200">
+    <header className="sticky top-0 z-30 w-full border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+      {/* Clinical Utility Top Bar */}
+      <div className="border-b border-slate-800 bg-slate-900 text-slate-200">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-1.5 text-xs">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             <span className="inline-flex items-center gap-1.5 font-medium text-emerald-400">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+              </span>
               <PhoneCall className="size-3.5" />
-              24/7 Emergency Hotline: 10633
+              Emergency Hotline:{" "}
+              <strong className="font-mono font-bold tracking-wider text-white">
+                10633
+              </strong>
             </span>
             <span className="hidden items-center gap-1.5 text-slate-300 sm:inline-flex">
-              <MapPin className="size-3.5 text-sky-400" />
+              <MapPin className="size-3.5 text-slate-400" />
               21 Shyamoli, Mirpur Road, Dhaka-1207
             </span>
             <span className="hidden items-center gap-1.5 text-slate-300 md:inline-flex">
-              <Clock className="size-3.5 text-sky-400" />
-              Open 24 Hours
+              <Clock className="size-3.5 text-slate-400" />
+              24/7 Trauma, ICU &amp; Diagnostics
             </span>
           </div>
           <Link
             href="/apply"
-            className="inline-flex items-center gap-1 font-medium text-sky-300 transition-colors hover:text-white"
+            className="inline-flex items-center gap-1.5 font-medium text-slate-300 transition-colors hover:text-white"
           >
-            <Stethoscope className="size-3.5" />
-            Join as a Doctor
+            <Stethoscope className="size-3.5 text-teal-400" />
+            Join Medical Panel
           </Link>
         </div>
       </div>
 
-      {/* Main navigation bar */}
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4">
+      {/* Main Clinical Navigation Bar */}
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4">
         <Link
           href="/"
-          className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
+          className="flex items-center gap-3 transition-opacity hover:opacity-90"
         >
           <Logo />
           <div className="flex flex-col leading-tight">
             <span className="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
               Bangladesh Specialized Hospital
             </span>
-            <span className="text-[11px] font-medium tracking-wide text-primary">
-              Center of Medical Excellence
+            <span className="text-[11px] font-medium tracking-normal text-slate-500">
+              Tertiary Care &bull; Dhaka
             </span>
           </div>
         </Link>
 
-        {/* Desktop navigation */}
+        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
           {routes.map((route) => {
             const isActive =
@@ -123,10 +130,10 @@ export default function Header() {
                 key={route.url}
                 href={route.url}
                 className={cn(
-                  "rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
+                  "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                    ? "bg-slate-100 font-semibold text-slate-900"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
                 )}
               >
                 {route.name}
@@ -138,46 +145,48 @@ export default function Header() {
             <Link
               href={dashboardRoute[role]}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors",
+                "inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                 pathname.startsWith(dashboardRoute[role])
-                  ? "bg-primary/10 text-primary"
-                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                  ? "bg-slate-100 font-semibold text-slate-900"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
               )}
             >
               <LayoutDashboard className="size-4" />
-              Dashboard
+              Portal
             </Link>
           )}
         </nav>
 
-        {/* Desktop actions */}
-        <div className="hidden items-center gap-2.5 md:flex">
+        {/* Desktop Actions */}
+        <div className="hidden items-center gap-2 md:flex">
           {!isLoading && !data && (
             <>
               <Button
                 variant="outline"
-                render={<Link href="/login">Login</Link>}
+                size="sm"
+                render={<Link href="/login">Portal Login</Link>}
                 nativeButton={false}
               >
-                Login
+                Portal Login
               </Button>
               <Button
-                render={<Link href="/doctors">Book Appointment</Link>}
+                size="sm"
+                render={<Link href="/doctors">Book Consultation</Link>}
                 nativeButton={false}
               >
-                Book Appointment
+                Book Consultation
               </Button>
             </>
           )}
           {!isLoading && data && (
             <Button onClick={handleLogout} variant="outline" size="sm">
               <LogOut className="size-4" />
-              Logout
+              Sign Out
             </Button>
           )}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
@@ -193,9 +202,9 @@ export default function Header() {
         </Button>
       </div>
 
-      {/* Mobile navigation panel */}
+      {/* Mobile Navigation Panel */}
       {mobileMenuOpen && (
-        <div className="border-t bg-white px-4 py-4 shadow-lg md:hidden">
+        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-md md:hidden">
           <nav className="flex flex-col gap-1">
             {routes.map((route) => {
               const isActive =
@@ -208,10 +217,10 @@ export default function Header() {
                   href={route.url}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "rounded-lg px-3 py-2.5 text-sm font-medium",
+                    "rounded-md px-3 py-2 text-sm font-medium",
                     isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-slate-700 hover:bg-slate-100",
+                      ? "bg-slate-100 font-semibold text-slate-900"
+                      : "text-slate-700 hover:bg-slate-50",
                   )}
                 >
                   {route.name}
@@ -222,14 +231,14 @@ export default function Header() {
               <Link
                 href={dashboardRoute[role]}
                 onClick={() => setMobileMenuOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Dashboard
+                Portal Dashboard
               </Link>
             )}
           </nav>
 
-          <div className="mt-4 flex flex-col gap-2 border-t pt-4">
+          <div className="mt-3 flex flex-col gap-2 border-t border-slate-100 pt-3">
             {!isLoading && !data && (
               <>
                 <Button
@@ -240,12 +249,12 @@ export default function Header() {
                       href="/login"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Login
+                      Portal Login
                     </Link>
                   }
                   nativeButton={false}
                 >
-                  Login
+                  Portal Login
                 </Button>
                 <Button
                   className="w-full"
@@ -254,12 +263,12 @@ export default function Header() {
                       href="/doctors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Book Appointment
+                      Book Consultation
                     </Link>
                   }
                   nativeButton={false}
                 >
-                  Book Appointment
+                  Book Consultation
                 </Button>
               </>
             )}
@@ -269,7 +278,7 @@ export default function Header() {
                 variant="destructive"
                 className="w-full"
               >
-                Logout
+                Sign Out
               </Button>
             )}
           </div>

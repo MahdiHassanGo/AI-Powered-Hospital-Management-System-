@@ -9,46 +9,48 @@ const DEPARTMENTS = [
   "Orthopedics",
   "Pediatrics",
   "Gynecology",
+  "Gastroenterology",
+  "Internal Medicine",
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-slate-950 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
+      <div className="mx-auto max-w-7xl px-4 py-12">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             <Link href="/" className="flex items-center gap-2.5">
               <Logo />
               <div className="flex flex-col leading-tight">
                 <span className="text-base font-bold text-white">
                   Bangladesh Specialized Hospital
                 </span>
-                <span className="text-[11px] font-medium text-sky-400">
-                  Center of Medical Excellence
+                <span className="text-[11px] font-medium text-slate-400">
+                  Tertiary Medical Center &bull; Dhaka
                 </span>
               </div>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-400">
-              Delivering compassionate, evidence-based tertiary healthcare with
-              BMDC-verified specialists, modern diagnostics, and AI-guided
-              patient care across Bangladesh.
+            <p className="text-xs leading-relaxed text-slate-400">
+              Tertiary clinical healthcare institution delivering
+              multi-disciplinary specialist consultations, modern diagnostics,
+              and round-the-clock trauma care in Shyamoli, Dhaka.
             </p>
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
-              <ShieldCheck className="size-4" />
-              BMDC Verified Specialist Network
+            <div className="inline-flex items-center gap-2 rounded-md border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-300">
+              <ShieldCheck className="size-4 text-emerald-400" />
+              BMDC-Verified Medical Panel
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Patient Access */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold tracking-wider text-white uppercase">
-              Quick Links
+            <h3 className="mb-3 text-xs font-semibold tracking-wider text-slate-200 uppercase">
+              Patient Services
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/" className="transition-colors hover:text-white">
-                  Home
+                  Hospital Overview
                 </Link>
               </li>
               <li>
@@ -56,7 +58,7 @@ export default function Footer() {
                   href="/doctors"
                   className="transition-colors hover:text-white"
                 >
-                  Find a Doctor
+                  Consultant Directory
                 </Link>
               </li>
               <li>
@@ -64,7 +66,7 @@ export default function Footer() {
                   href="/about-us"
                   className="transition-colors hover:text-white"
                 >
-                  About Us
+                  Clinical Mission &amp; Location
                 </Link>
               </li>
               <li>
@@ -72,7 +74,7 @@ export default function Footer() {
                   href="/apply"
                   className="transition-colors hover:text-white"
                 >
-                  Apply as a Doctor
+                  Specialist Doctor Application
                 </Link>
               </li>
               <li>
@@ -86,12 +88,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Specialties */}
+          {/* Key Clinical Departments */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold tracking-wider text-white uppercase">
-              Key Departments
+            <h3 className="mb-3 text-xs font-semibold tracking-wider text-slate-200 uppercase">
+              Clinical Specialties
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
               {DEPARTMENTS.map((dept) => (
                 <li key={dept}>
                   <Link
@@ -105,40 +107,43 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Emergency & Campus Contact */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold tracking-wider text-white uppercase">
-              Contact & Emergency
+            <h3 className="mb-3 text-xs font-semibold tracking-wider text-slate-200 uppercase">
+              Hospital Campus &amp; Emergency
             </h3>
-            <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-sky-400" />
+            <ul className="space-y-2.5 text-xs text-slate-400">
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-slate-400" />
                 <span>21 Shyamoli, Mirpur Road, Dhaka-1207, Bangladesh</span>
               </li>
-              <li className="flex items-center gap-2.5">
+              <li className="flex items-center gap-2">
                 <PhoneCall className="size-4 shrink-0 text-emerald-400" />
                 <span className="font-medium text-white">
-                  Hotline: 10633 (24/7)
+                  Hotline: 10633 (24 Hours)
                 </span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="size-4 shrink-0 text-sky-400" />
+              <li className="flex items-center gap-2">
+                <Mail className="size-4 shrink-0 text-slate-400" />
                 <span>info@bshospital.com.bd</span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Clock className="size-4 shrink-0 text-sky-400" />
-                <span>Emergency & ICU Open 24/7</span>
+              <li className="flex items-center gap-2">
+                <Clock className="size-4 shrink-0 text-slate-400" />
+                <span>Emergency, ICU &amp; Diagnostics Open 24/7</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-800 pt-6 text-xs text-slate-400 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-slate-900 pt-6 text-xs text-slate-500 sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} Bangladesh Specialized Hospital.
             All rights reserved.
           </p>
-          <p>Trusted Specialized Healthcare &bull; Dhaka, Bangladesh</p>
+          <p className="font-mono">
+            Shyamoli, Dhaka-1207 &bull; Bangladesh Medical &amp; Dental Council
+            Registered
+          </p>
         </div>
       </div>
     </footer>

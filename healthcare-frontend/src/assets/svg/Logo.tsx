@@ -7,7 +7,10 @@ export default function Logo() {
       viewBox="0 0 40 40"
       fill="none"
       id="Logo"
+      role="img"
+      aria-label="Bangladesh Specialized Hospital"
     >
+      <title>Bangladesh Specialized Hospital</title>
       <g id="logomark">
         <path
           d="M24 0H16V12.0632C15.9663 14.2434 14.1885 16 12.0005 16H0V24H8.68629C10.808 24 12.8429 23.1571 14.3431 21.6569L21.6569 14.3431C23.1571 12.8429 24 10.808 24 8.68629V0Z"

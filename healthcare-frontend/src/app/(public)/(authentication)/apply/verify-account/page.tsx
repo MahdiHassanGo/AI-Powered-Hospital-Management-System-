@@ -1,8 +1,7 @@
-import Logo from "@/assets/svg/Logo";
-import VerifyAccountForm from "@/components/form/verify-account-form";
-
 import Link from "next/link";
 import { Suspense } from "react";
+import Logo from "@/assets/svg/Logo";
+import VerifyAccountForm from "@/components/form/verify-account-form";
 
 export default function VerifyDoctorAccountPage() {
   return (
@@ -29,7 +28,7 @@ export default function VerifyDoctorAccountPage() {
       <div className="relative hidden bg-muted lg:block">
         <img
           src="/login.jpg"
-          alt="Image"
+          alt="Bangladesh Specialized Hospital physician portal"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

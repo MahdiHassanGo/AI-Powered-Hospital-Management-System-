@@ -39,21 +39,7 @@ const SPECIALIZATIONS = [
   "Hematology",
   "General Surgery",
   "Neurosurgery",
-  "Plastic Surgery",
-  "Dentistry",
   "Internal Medicine",
-  "Family Medicine",
-  "Infectious Disease",
-  "Cardiac Surgery",
-  "Neonatology",
-  "Pediatric Surgery",
-  "Allergy & Immunology",
-  "Geriatrics",
-  "Sports Medicine",
-  "Hepatology",
-  "Pain Medicine",
-  "Nutrition & Dietetics",
-  "Physical Medicine & Rehabilitation",
 ];
 
 type SortOption = "experience_desc" | "fee_asc" | "fee_desc" | "newest";
@@ -65,7 +51,7 @@ const SORT_MAP: Record<
   experience_desc: {
     sortBy: "experienceYears",
     sortOrder: "desc",
-    label: "Most Experienced",
+    label: "Experience: High to Low",
   },
   fee_asc: {
     sortBy: "consultationFee",
@@ -80,7 +66,7 @@ const SORT_MAP: Record<
   newest: {
     sortBy: "createdAt",
     sortOrder: "desc",
-    label: "Newest Added",
+    label: "Recently Appointed",
   },
 };
 
@@ -96,7 +82,7 @@ export default function PublicDoctorList() {
   const [sortOption, setSortOption] = useState<SortOption>("experience_desc");
   const [page, setPage] = useState(1);
 
-  // Sync URL query params if user clicks a department link from header/footer
+  // Sync URL query params
   useEffect(() => {
     setSearchInput(searchParams.get("searchTerm") ?? "");
     setSpecialization(searchParams.get("specialization") ?? "");
@@ -134,13 +120,13 @@ export default function PublicDoctorList() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Search & Filter Control Bar */}
-      <div className="rounded-2xl border bg-white p-4 shadow-xs">
+      <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs">
         <div className="grid gap-3 md:grid-cols-12">
           {/* Search Input */}
           <div className="relative md:col-span-5">
-            <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
             <Input
               type="text"
               value={searchInput}
@@ -148,8 +134,8 @@ export default function PublicDoctorList() {
                 setSearchInput(e.target.value);
                 setPage(1);
               }}
-              placeholder="Search by doctor name, qualification, or specialty..."
-              className="h-10 pl-10"
+              placeholder="Search by physician name, degree, or specialty..."
+              className="h-9 pl-9 text-xs"
             />
           </div>
 
@@ -163,7 +149,7 @@ export default function PublicDoctorList() {
                 setSpecialization(e.target.value);
                 setPage(1);
               }}
-              className="h-10 w-full rounded-lg border border-input bg-background pr-3 pl-9 text-sm text-foreground outline-none focus:border-ring focus:ring-3 focus:ring-ring/50"
+              className="h-9 w-full rounded-md border border-input bg-background pr-3 pl-9 text-xs text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/40"
             >
               {SPECIALIZATIONS.map((spec) => (
                 <option
@@ -186,7 +172,7 @@ export default function PublicDoctorList() {
                 setSortOption(e.target.value as SortOption);
                 setPage(1);
               }}
-              className="h-10 w-full rounded-lg border border-input bg-background pr-3 pl-9 text-sm text-foreground outline-none focus:border-ring focus:ring-3 focus:ring-ring/50"
+              className="h-9 w-full rounded-md border border-input bg-background pr-3 pl-9 text-xs text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/40"
             >
               {Object.entries(SORT_MAP).map(([key, item]) => (
                 <option key={key} value={key}>
@@ -197,8 +183,8 @@ export default function PublicDoctorList() {
           </div>
         </div>
 
-        {/* Quick Specialty Pills */}
-        <div className="mt-3 flex flex-wrap items-center gap-2 border-t pt-3">
+        {/* Quick Filter Chips */}
+        <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-3">
           {[
             "Cardiology",
             "Dermatology",
@@ -218,10 +204,10 @@ export default function PublicDoctorList() {
                   setSpecialization(active ? "" : spec);
                   setPage(1);
                 }}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
                   active
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-slate-100 text-slate-700 hover:bg-primary/10 hover:text-primary"
+                    ? "bg-slate-900 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
                 {spec}
@@ -233,33 +219,36 @@ export default function PublicDoctorList() {
             <button
               type="button"
               onClick={clearFilters}
-              className="ml-auto inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50"
+              className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50"
             >
               <X className="size-3.5" />
-              Clear filters
+              Reset filters
             </button>
           )}
         </div>
       </div>
 
-      {/* Results Count Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-600">
+      {/* Directory Count Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
         <p>
           {isLoading ? (
-            "Loading verified specialists..."
+            "Loading verified directory..."
           ) : (
             <>
               Showing{" "}
-              <span className="font-semibold text-slate-900">
+              <span className="font-mono font-semibold tabular-nums text-slate-900">
                 {doctors.length}
               </span>{" "}
-              of <span className="font-semibold text-slate-900">{total}</span>{" "}
+              of{" "}
+              <span className="font-mono font-semibold tabular-nums text-slate-900">
+                {total}
+              </span>{" "}
               verified specialists
               {specialization ? (
                 <>
                   {" "}
                   in{" "}
-                  <span className="font-semibold text-primary">
+                  <span className="font-semibold text-slate-900">
                     {specialization}
                   </span>
                 </>
@@ -268,7 +257,7 @@ export default function PublicDoctorList() {
           )}
         </p>
         {isFetching && !isLoading && (
-          <span className="text-xs text-primary">Updating results…</span>
+          <span className="text-xs text-teal-700">Updating directory…</span>
         )}
       </div>
 
@@ -276,33 +265,37 @@ export default function PublicDoctorList() {
       {isLoading ? (
         <PublicDoctorListLoading />
       ) : isError ? (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-10 text-center">
-          <p className="font-medium text-rose-700">
-            Could not load doctors right now.
+        <div className="rounded-xl border border-rose-200 bg-rose-50/50 p-8 text-center">
+          <p className="text-xs font-semibold text-rose-700">
+            Could not retrieve specialist directory.
           </p>
-          <p className="mt-1 text-sm text-slate-600">
-            Please ensure the backend server is running and try refreshing.
+          <p className="mt-1 text-xs text-slate-600">
+            Please ensure network connectivity and try again, or call hospital
+            hotline 10633.
           </p>
         </div>
       ) : doctors.length === 0 ? (
-        <div className="rounded-2xl border bg-white p-12 text-center shadow-xs">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
-            <Stethoscope className="size-6" />
-          </div>
-          <h3 className="mt-4 text-base font-semibold text-slate-900">
-            No matching doctors found
+        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center">
+          <Stethoscope className="mx-auto size-8 text-slate-400" />
+          <h3 className="mt-3 text-sm font-semibold text-slate-900">
+            No matching consultants found
           </h3>
-          <p className="mt-1 text-sm text-slate-600">
-            Try adjusting your search keywords or selecting another department.
+          <p className="mt-1 text-xs text-slate-600">
+            Try revising your search term or select &quot;All Specialties&quot;.
           </p>
           {hasActiveFilters && (
-            <Button variant="outline" className="mt-4" onClick={clearFilters}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3"
+              onClick={clearFilters}
+            >
               Reset Filters
             </Button>
           )}
         </div>
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {doctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
           ))}
@@ -311,10 +304,16 @@ export default function PublicDoctorList() {
 
       {/* Pagination */}
       {!isLoading && totalPages > 1 && (
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-6">
-          <p className="text-sm text-slate-600">
-            Page <span className="font-semibold text-slate-900">{page}</span> of{" "}
-            <span className="font-semibold text-slate-900">{totalPages}</span>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-4">
+          <p className="text-xs text-slate-600">
+            Page{" "}
+            <span className="font-mono font-semibold tabular-nums text-slate-900">
+              {page}
+            </span>{" "}
+            of{" "}
+            <span className="font-mono font-semibold tabular-nums text-slate-900">
+              {totalPages}
+            </span>
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -350,22 +349,22 @@ export default function PublicDoctorList() {
 
 export function PublicDoctorListLoading() {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {[1, 2, 3, 4, 5, 6].map((item) => (
         <div
           key={item}
-          className="space-y-3 rounded-2xl border bg-white p-5 shadow-xs"
+          className="space-y-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs"
         >
           <div className="flex items-center gap-3">
-            <Skeleton className="size-13 rounded-xl" />
-            <div className="flex-1 space-y-2">
-              <Skeleton className="h-5 w-2/3" />
-              <Skeleton className="h-4 w-1/3" />
+            <Skeleton className="size-11 rounded-lg" />
+            <div className="flex-1 space-y-1.5">
+              <Skeleton className="h-4 w-2/3" />
+              <Skeleton className="h-3 w-1/3" />
             </div>
           </div>
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-4/5" />
-          <Skeleton className="h-9 w-full" />
+          <Skeleton className="h-3.5 w-full" />
+          <Skeleton className="h-3.5 w-4/5" />
+          <Skeleton className="h-8 w-full" />
         </div>
       ))}
     </div>

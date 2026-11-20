@@ -18,122 +18,109 @@ import Link from "next/link";
 const DEPARTMENTS = [
   {
     name: "Cardiology",
-    description: "Heart disease, hypertension, angiogram & ECG care",
+    description: "Heart diseases, hypertension, coronary evaluation & ECG care",
     icon: HeartPulse,
-    color: "text-rose-600 bg-rose-50",
   },
   {
     name: "Dermatology",
-    description: "Skin rashes, allergies, acne, eczema & hair care",
+    description:
+      "Skin conditions, allergies, eczema, psoriasis & clinical care",
     icon: Sparkles,
-    color: "text-amber-600 bg-amber-50",
   },
   {
     name: "Neurology",
-    description: "Migraine, stroke, epilepsy & nervous system care",
+    description: "Migraine, stroke, neuropathies & central nervous disorders",
     icon: Brain,
-    color: "text-indigo-600 bg-indigo-50",
   },
   {
     name: "Orthopedics",
-    description: "Fractures, joint pain, arthritis & spine surgery",
+    description: "Joint disorders, trauma surgery, arthritis & spine care",
     icon: Bone,
-    color: "text-sky-600 bg-sky-50",
   },
   {
     name: "Pediatrics",
-    description: "Newborn care, child growth, asthma & vaccination",
+    description: "Infant growth, adolescent health, vaccinations & pediatrics",
     icon: Baby,
-    color: "text-emerald-600 bg-emerald-50",
   },
   {
     name: "Gynecology",
-    description: "Pregnancy care, PCOS, obstetrics & women's health",
+    description: "Obstetric care, maternal medicine & gynecological health",
     icon: ShieldPlus,
-    color: "text-pink-600 bg-pink-50",
   },
   {
     name: "Gastroenterology",
-    description: "Ulcers, acidity, IBS, liver & endoscopy",
+    description: "Digestive health, hepatic conditions, endoscopy & colon care",
     icon: Activity,
-    color: "text-orange-600 bg-orange-50",
   },
   {
     name: "Ophthalmology",
-    description: "Cataract, glaucoma, retina & vision care",
+    description: "Cataracts, retina disorders, glaucoma & diagnostic vision",
     icon: Eye,
-    color: "text-cyan-600 bg-cyan-50",
   },
   {
     name: "ENT",
-    description: "Sinusitis, hearing loss, tonsillitis & vertigo",
+    description: "Ear disorders, sinusitis, laryngology & hearing evaluation",
     icon: Ear,
-    color: "text-teal-600 bg-teal-50",
   },
   {
     name: "Pulmonology",
-    description: "Asthma, COPD, chronic cough & chest diseases",
+    description: "Asthma, respiratory infections, COPD & thoracic evaluation",
     icon: Wind,
-    color: "text-blue-600 bg-blue-50",
   },
   {
     name: "Endocrinology",
-    description: "Diabetes, thyroid & hormonal care",
+    description: "Diabetes mellitus, thyroid management & metabolic health",
     icon: Pill,
-    color: "text-violet-600 bg-violet-50",
   },
   {
     name: "Internal Medicine",
-    description: "Comprehensive adult medicine & preventive care",
+    description: "Comprehensive adult medical diagnosis & chronic management",
     icon: Stethoscope,
-    color: "text-primary bg-primary/10",
   },
 ];
 
 export default function DepartmentsSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-wider text-primary uppercase">
-            Centers of Excellence
+    <section className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
+      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div className="space-y-1">
+          <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            Clinical Units
           </p>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Browse by Medical Department
+            Departments &amp; Specialties
           </h2>
-          <p className="max-w-2xl text-sm text-slate-600 sm:text-base">
-            Select a clinical department to view verified consultants,
-            consultation fees, and today&apos;s available schedules.
+          <p className="max-w-2xl text-xs text-slate-600 sm:text-sm">
+            Select a specialty to view consultant profiles, BMDC licenses, and
+            current consultation schedules.
           </p>
         </div>
         <Link
           href="/doctors"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 hover:text-teal-700"
         >
-          View all 34+ departments
-          <ArrowRight className="size-4" />
+          View all 34 departments
+          <ArrowRight className="size-3.5" />
         </Link>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {DEPARTMENTS.map((dept) => {
           const Icon = dept.icon;
           return (
             <Link
               key={dept.name}
               href={`/doctors?specialization=${encodeURIComponent(dept.name)}`}
-              className="group flex items-start gap-3.5 rounded-2xl border bg-white p-4 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-md"
+              className="group flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 transition-colors hover:border-slate-400 hover:bg-slate-50/50"
             >
-              <div
-                className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${dept.color}`}
-              >
-                <Icon className="size-5" />
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700 transition-colors group-hover:bg-slate-900 group-hover:text-white">
+                <Icon className="size-4.5" />
               </div>
               <div className="min-w-0">
-                <h3 className="font-semibold text-slate-900 group-hover:text-primary transition-colors">
+                <h3 className="text-sm font-semibold text-slate-900 group-hover:text-slate-900">
                   {dept.name}
                 </h3>
-                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+                <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
                   {dept.description}
                 </p>
               </div>

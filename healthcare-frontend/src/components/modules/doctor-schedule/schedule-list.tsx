@@ -3,10 +3,9 @@
 import { Suspense, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ScheduleParams, ScheduleStatus } from "@/types";
+import ScheduleCreateDialog from "./schedule-create-dialog";
 import ScheduleListLoading from "./schedule-list-loading";
 import ScheduleTable from "./schedule-table";
-import { Button } from "@/components/ui/button";
-import ScheduleCreateDialog from "./schedule-create-dialog";
 
 const statuses: ["ALL" | ScheduleStatus, string][] = [
   ["ALL", "All"],

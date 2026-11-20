@@ -1,14 +1,13 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import DoctorApprovalTable from "./doctor-approval-table";
-import { ChangeEvent, Suspense, useState } from "react";
-import DoctorApprovalTableLoading from "./doctor-approval-table-loading";
-import { DoctorParams, DoctorVerificationStatus } from "@/types";
+import { type ChangeEvent, Suspense, useState } from "react";
 import { Input } from "@/components/ui/input";
-import DoctorReviewSheet from "./doctor-review-sheet";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useDebounce from "@/hooks/debounce.hook";
-import TablePagination from "@/components/ui/table-pagination";
+import type { DoctorParams, DoctorVerificationStatus } from "@/types";
+import DoctorApprovalTable from "./doctor-approval-table";
+import DoctorApprovalTableLoading from "./doctor-approval-table-loading";
+import DoctorReviewSheet from "./doctor-review-sheet";
 
 const verificationStatus: ["ALL" | DoctorVerificationStatus, string][] = [
   ["APPROVED", "Approved"],

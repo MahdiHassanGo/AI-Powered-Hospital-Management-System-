@@ -1,6 +1,10 @@
 "use client";
 
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useVerifyAccount, useVerifyDoctorAccount } from "@/hooks";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -9,12 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Button } from "../ui/button";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../ui/field";
-import { useEffect, useState } from "react";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useVerifyAccount, useVerifyDoctorAccount } from "@/hooks";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { toast } from "../ui/toast";
 
 const RESEND_COOLDOWN = 120;
@@ -42,7 +42,7 @@ export default function VerifyAccountForm({
     if (!email) {
       router.push("/");
     }
-  }, [email]);
+  }, [email, router.push]);
 
   useEffect(() => {
     if (resendTimer <= 0) {
@@ -54,7 +54,7 @@ export default function VerifyAccountForm({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [resendTimer]);
 
   const handleOTP = () => {
     if (otp.length !== 6) {

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -69,7 +69,8 @@ export default function TablePagination({
         </PaginationItem>
         {getButtonArray(totalPages, page).map((item, index) =>
           item === "ellipsis" ? (
-            <PaginationItem key={`ellipsis${index}`}>
+            // biome-ignore lint/suspicious/noArrayIndexKey: pagination ellipsis separator
+            <PaginationItem key={`ellipsis-${index}`}>
               <PaginationEllipsis />
             </PaginationItem>
           ) : (

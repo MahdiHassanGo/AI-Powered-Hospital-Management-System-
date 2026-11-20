@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useGetMyAppointments } from "@/hooks";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useGetMyAppointments } from "@/hooks";
 
 export default function AppointmentList() {
   const params = useSearchParams();

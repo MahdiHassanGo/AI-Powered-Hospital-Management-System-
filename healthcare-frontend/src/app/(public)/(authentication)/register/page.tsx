@@ -1,7 +1,6 @@
+import Link from "next/link";
 import Logo from "@/assets/svg/Logo";
 import { RegisterForm } from "@/components/form/register-form";
-
-import Link from "next/link";
 
 export default function RegisterPage() {
   return (
@@ -26,7 +25,7 @@ export default function RegisterPage() {
       <div className="relative hidden bg-muted lg:block">
         <img
           src="/register.jpg"
-          alt="Image"
+          alt="Bangladesh Specialized Hospital specialist consultation"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

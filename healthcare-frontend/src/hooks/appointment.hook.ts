@@ -1,5 +1,5 @@
-import { bookAppointment, getMyAppointments } from "@/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { bookAppointment, getMyAppointments } from "@/api";
 
 export function useBookAppointment() {
   return useMutation({

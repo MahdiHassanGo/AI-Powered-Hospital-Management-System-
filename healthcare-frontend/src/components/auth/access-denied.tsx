@@ -1,4 +1,4 @@
-import { Shield, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import Link from "next/link";
 
 export default function AccessDenied() {

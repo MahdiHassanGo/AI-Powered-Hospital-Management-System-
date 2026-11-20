@@ -3,9 +3,9 @@
 import {
   ArrowRight,
   CalendarCheck2,
-  MessageSquareHeart,
+  FileCheck2,
+  MessageSquare,
   SearchCheck,
-  Sparkles,
   Stethoscope,
 } from "lucide-react";
 import Link from "next/link";
@@ -14,24 +14,24 @@ import { Button } from "@/components/ui/button";
 const STEPS = [
   {
     step: "01",
-    title: "Find Your Specialist",
+    title: "Select Specialist",
     description:
-      "Search by medical department, doctor name, or describe your symptoms to our AI Medical Assistant for instant specialist matching.",
+      "Filter by medical department, BMDC license, doctor name, or use clinical triage to match symptoms to appropriate specialists.",
     icon: SearchCheck,
   },
   {
     step: "02",
-    title: "Choose an Available Slot",
+    title: "Select Consultation Slot",
     description:
-      "Review verified BMDC credentials, experience, and transparent consultation fees in BDT, then pick a convenient appointment time.",
+      "Review published clinic hours and transparent consultation fees in BDT, then choose your preferred time slot.",
     icon: CalendarCheck2,
   },
   {
     step: "03",
     title: "Confirm & Consult",
     description:
-      "Complete secure booking via bKash and receive your appointment serial, meeting link, and digital prescription directly.",
-    icon: MessageSquareHeart,
+      "Complete payment with bKash to secure your appointment serial number and consult the specialist at the hospital.",
+    icon: FileCheck2,
   },
 ];
 
@@ -41,42 +41,42 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 space-y-16">
+    <section className="mx-auto max-w-7xl px-4 py-12 lg:py-16 space-y-12">
       {/* 3-step patient journey */}
       <div>
-        <div className="mx-auto max-w-2xl text-center space-y-2">
-          <p className="text-xs font-semibold tracking-wider text-primary uppercase">
-            Simple Patient Journey
+        <div className="space-y-1">
+          <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            Clinical Process
           </p>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            How Booking Works at Bangladesh Specialized Hospital
+            How Consultations Work
           </h2>
-          <p className="text-sm text-slate-600 sm:text-base">
-            From symptom discovery to confirmed consultation in three easy
-            steps.
+          <p className="text-xs text-slate-600 sm:text-sm">
+            Simple 3-step scheduling process for in-hospital specialist
+            consultations.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {STEPS.map((item) => {
             const Icon = item.icon;
             return (
               <div
                 key={item.step}
-                className="relative rounded-2xl border bg-white p-6 shadow-xs"
+                className="relative rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="size-6" />
+                  <div className="flex size-10 items-center justify-center rounded-lg bg-slate-100 text-slate-800">
+                    <Icon className="size-5" />
                   </div>
-                  <span className="text-3xl font-extrabold text-slate-100">
+                  <span className="font-mono text-2xl font-bold text-slate-200">
                     {item.step}
                   </span>
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                <h3 className="mt-4 text-base font-semibold text-slate-900">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                   {item.description}
                 </p>
               </div>
@@ -85,64 +85,66 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
-      {/* Bottom Dual CTA Banner */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="flex flex-col justify-between rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-lg">
-          <div className="space-y-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-300">
-              <Sparkles className="size-3.5" />
-              RAG-Powered Healthcare AI
+      {/* Structured Dual Information Cards */}
+      <div className="grid gap-4 lg:grid-cols-2">
+        {/* Triage Guidance Card */}
+        <div className="flex flex-col justify-between rounded-2xl bg-slate-900 p-6 text-white">
+          <div className="space-y-2.5">
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-xs font-medium text-emerald-400">
+              <MessageSquare className="size-3.5" />
+              Hospital Department Triage
             </span>
-            <h3 className="text-2xl font-bold tracking-tight">
-              Not sure which department matches your symptoms?
+            <h3 className="text-xl font-bold tracking-tight">
+              Unsure which clinical department you need?
             </h3>
-            <p className="text-sm leading-relaxed text-slate-300">
-              Ask our AI Medical Assistant about skin rashes, chest discomfort,
-              migraines, or child health—and get matched immediately to verified
-              Bangladesh Specialized Hospital doctors.
+            <p className="text-xs leading-relaxed text-slate-300">
+              Describe acute or chronic symptoms (such as persistent coughing,
+              joint swelling, or skin lesions) to identify the appropriate
+              clinical discipline at Bangladesh Specialized Hospital.
             </p>
           </div>
-          <div className="mt-6">
+          <div className="mt-5">
             <Button
-              size="lg"
+              size="sm"
               variant="secondary"
               onClick={openChat}
-              className="font-semibold"
+              className="bg-white font-medium text-slate-900 hover:bg-slate-100"
             >
-              <Sparkles className="size-4 text-primary" />
-              Launch AI Assistant
+              <MessageSquare className="size-3.5 text-slate-700" />
+              Open Triage Assistant
             </Button>
           </div>
         </div>
 
-        <div className="flex flex-col justify-between rounded-3xl border bg-gradient-to-br from-primary/5 via-white to-sky-50 p-8 shadow-sm">
-          <div className="space-y-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-              <Stethoscope className="size-3.5" />
-              For Medical Professionals
+        {/* Doctor Recruitment Card */}
+        <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6">
+          <div className="space-y-2.5">
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+              <Stethoscope className="size-3.5 text-slate-700" />
+              Physician Credentialing
             </span>
-            <h3 className="text-2xl font-bold tracking-tight text-slate-900">
-              Join Our Specialist Medical Panel
+            <h3 className="text-xl font-bold tracking-tight text-slate-900">
+              Join Our Medical Specialist Panel
             </h3>
-            <p className="text-sm leading-relaxed text-slate-600">
-              Are you a BMDC-certified specialist looking to serve patients
-              online and in-person? Submit your credentials and join Bangladesh
-              Specialized Hospital.
+            <p className="text-xs leading-relaxed text-slate-600">
+              Are you a BMDC-registered specialist holding post-graduate degrees
+              (FCPS, MD, MS, MRCP)? Submit credentials to join the clinical
+              faculty of Bangladesh Specialized Hospital.
             </p>
           </div>
-          <div className="mt-6">
+          <div className="mt-5">
             <Button
-              size="lg"
+              size="sm"
               render={
                 <Link href="/apply">
-                  Apply as a Doctor
-                  <ArrowRight className="size-4" />
+                  Apply for Hospital Panel
+                  <ArrowRight className="size-3.5" />
                 </Link>
               }
               nativeButton={false}
             >
-              Apply as a Doctor
-              <ArrowRight className="size-4" />
+              Apply for Hospital Panel
+              <ArrowRight className="size-3.5" />
             </Button>
           </div>
         </div>

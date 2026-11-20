@@ -1,6 +1,6 @@
+import Link from "next/link";
 import Logo from "@/assets/svg/Logo";
 import DoctorApplyForm from "@/components/form/doctor-apply-form";
-import Link from "next/link";
 
 export default function ApplyPage() {
   return (
@@ -25,7 +25,7 @@ export default function ApplyPage() {
       <div className="relative hidden bg-muted lg:block">
         <img
           src="/login.jpg"
-          alt="Image"
+          alt="Bangladesh Specialized Hospital consultation facility"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

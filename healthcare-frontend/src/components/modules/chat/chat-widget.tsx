@@ -2,9 +2,8 @@
 
 import {
   ArrowRight,
-  MessageCircleIcon,
+  MessageSquare,
   SendIcon,
-  SparklesIcon,
   Stethoscope,
   XIcon,
 } from "lucide-react";
@@ -25,9 +24,9 @@ interface ChatMessage {
 }
 
 const SUGGESTIONS = [
-  "I have a rash on my skin, which doctor should I consult?",
-  "I have trouble sleeping. Which specialist can help?",
-  "Suggest a cardiologist for chest pain or high blood pressure",
+  "I have persistent chest discomfort and shortness of breath",
+  "I have an itchy red rash on my arm for two weeks",
+  "Severe recurring migraines with vision sensitivity",
 ];
 
 export default function ChatWidget() {
@@ -114,9 +113,9 @@ export default function ChatWidget() {
         onError: () => {
           setInput((current) => current || content);
           toast.add({
-            title: "Message not sent",
+            title: "Transmission failed",
             description:
-              "We couldn't reach the hospital assistant. Please try again.",
+              "Could not connect to hospital triage service. Please try again.",
             type: "error",
           });
         },
@@ -133,21 +132,19 @@ export default function ChatWidget() {
     <>
       <Button
         ref={triggerRef}
-        size="icon-lg"
-        className="fixed right-5 bottom-5 z-40 size-14 rounded-full shadow-xl shadow-primary/25 transition-transform hover:scale-105"
+        size="icon"
+        className="fixed right-5 bottom-5 z-40 size-12 rounded-xl border border-slate-700 bg-slate-900 text-white shadow-md transition-colors hover:bg-slate-800"
         aria-label={
-          isOpen
-            ? "Close chat"
-            : "Chat with Bangladesh Specialized Hospital Assistant"
+          isOpen ? "Close clinical triage" : "Open hospital clinical triage"
         }
         aria-expanded={isOpen}
         aria-controls="healthcare-chat-panel"
         onClick={() => setIsOpen((open) => !open)}
       >
         {isOpen ? (
-          <XIcon className="size-6" />
+          <XIcon className="size-5" />
         ) : (
-          <MessageCircleIcon className="size-6" />
+          <MessageSquare className="size-5" />
         )}
       </Button>
 
@@ -155,60 +152,63 @@ export default function ChatWidget() {
         <div
           id="healthcare-chat-panel"
           role="dialog"
-          aria-label="Bangladesh Specialized Hospital Assistant"
-          className="fixed right-5 bottom-22 z-40 flex h-[min(36rem,calc(100dvh-7rem))] w-[min(25rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl bg-popover text-sm text-popover-foreground shadow-2xl ring-1 ring-foreground/10"
+          aria-label="Bangladesh Specialized Hospital Triage Assistant"
+          className="fixed right-5 bottom-20 z-40 flex h-[min(34rem,calc(100dvh-6rem))] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-xl border border-slate-300 bg-white text-xs text-slate-900 shadow-xl"
         >
-          <div className="flex items-center gap-3 border-b bg-primary px-4 py-3.5 text-primary-foreground">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary-foreground/15">
-              <SparklesIcon className="size-4" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-semibold">BSH Medical Assistant</p>
-              <p className="truncate text-xs text-primary-foreground/80">
-                AI-powered specialist recommendations
-              </p>
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-slate-200 bg-slate-900 px-4 py-3 text-white">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-emerald-500/20 text-emerald-400">
+                <Stethoscope className="size-4" />
+              </div>
+              <div className="min-w-0">
+                <p className="truncate font-semibold text-xs text-white">
+                  BSH Triage Assistant
+                </p>
+                <p className="truncate text-[10px] text-slate-300">
+                  Department &amp; specialist matching
+                </p>
+              </div>
             </div>
             <Button
               variant="ghost"
-              size="icon-sm"
-              className="text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground"
-              aria-label="Close chat"
+              size="icon-xs"
+              className="text-slate-300 hover:bg-slate-800 hover:text-white"
+              aria-label="Close triage"
               onClick={closeChat}
             >
-              <XIcon />
+              <XIcon className="size-4" />
             </Button>
           </div>
 
+          {/* Conversation Body */}
           <div
             ref={scrollAreaRef}
             aria-live="polite"
-            className="flex-1 space-y-3 overflow-y-auto bg-slate-50/60 p-4"
+            className="flex-1 space-y-3 overflow-y-auto bg-slate-50/60 p-3.5"
           >
             {messages.length === 0 && !isPending && (
               <div className="space-y-3">
-                <div className="max-w-[92%] rounded-2xl rounded-bl-sm border bg-white px-3.5 py-2.5 shadow-xs">
-                  <p className="leading-relaxed">
-                    Welcome to{" "}
-                    <strong className="font-semibold text-slate-900">
-                      Bangladesh Specialized Hospital
-                    </strong>
-                    ! Tell me your symptoms and I&apos;ll recommend the right
-                    specialist from our verified doctors.
+                <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-xs">
+                  <p className="leading-relaxed text-slate-700">
+                    Welcome to <strong>Bangladesh Specialized Hospital</strong>{" "}
+                    triage guidance. Describe your symptoms to find the
+                    appropriate medical specialty and BMDC-verified consultants.
                   </p>
                 </div>
-                <div className="space-y-2">
-                  <p className="px-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
-                    Try asking
+                <div className="space-y-1.5">
+                  <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+                    Suggested queries
                   </p>
                   {SUGGESTIONS.map((suggestion) => (
-                    <Button
+                    <button
                       key={suggestion}
-                      variant="outline"
-                      className="h-auto w-full justify-start bg-white px-3 py-2 text-left text-xs whitespace-normal hover:border-primary/40 hover:bg-primary/5"
+                      type="button"
+                      className="w-full rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-left text-[11px] text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50"
                       onClick={() => sendMessage(suggestion)}
                     >
                       {suggestion}
-                    </Button>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -219,15 +219,19 @@ export default function ChatWidget() {
             ))}
 
             {isPending && (
-              <div className="flex max-w-[90%] items-center gap-2 rounded-2xl rounded-bl-sm border bg-white px-3.5 py-2.5 text-muted-foreground shadow-xs">
+              <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-3 text-slate-500 shadow-xs">
                 <Spinner className="size-3.5" />
-                <span>Searching our specialist directory…</span>
+                <span>Checking hospital clinical directory…</span>
               </div>
             )}
           </div>
 
-          <form className="border-t bg-white p-3" onSubmit={handleSubmit}>
-            <div className="flex items-end gap-2">
+          {/* Input & Form */}
+          <form
+            className="border-t border-slate-200 bg-white p-2.5"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex items-end gap-1.5">
               <Textarea
                 ref={inputRef}
                 value={input}
@@ -238,24 +242,24 @@ export default function ChatWidget() {
                     sendMessage();
                   }
                 }}
-                placeholder="Describe your symptoms…"
+                placeholder="Describe your symptoms (e.g. fever, headache)…"
                 aria-label="Message"
                 rows={1}
-                className="max-h-28 min-h-9 resize-none py-2"
+                className="max-h-24 min-h-8 resize-none py-1.5 text-xs"
               />
               <Button
                 type="submit"
-                size="icon"
-                className="size-9 shrink-0"
+                size="icon-sm"
+                className="size-8 shrink-0"
                 disabled={!input.trim() || isPending}
-                aria-label="Send message"
+                aria-label="Send query"
               >
-                {isPending ? <Spinner /> : <SendIcon />}
+                {isPending ? <Spinner /> : <SendIcon className="size-3.5" />}
               </Button>
             </div>
-            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
-              Not a substitute for medical advice. For emergencies, call 10633
-              or visit our 24/7 Emergency Department.
+            <p className="mt-1.5 text-[10px] leading-snug text-slate-400">
+              Guidance tool only. For acute emergencies, call{" "}
+              <strong>10633</strong> or visit Emergency Dept, Shyamoli.
             </p>
           </form>
         </div>
@@ -272,36 +276,36 @@ function ChatBubble({ message }: { message: ChatMessage }) {
       <div
         className={
           isUser
-            ? "max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-3.5 py-2.5 text-primary-foreground shadow-xs"
-            : "max-w-[92%] rounded-2xl rounded-bl-sm border bg-white px-3.5 py-2.5 shadow-xs"
+            ? "max-w-[85%] rounded-lg bg-slate-900 px-3 py-2 text-white shadow-xs"
+            : "max-w-[92%] rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-800 shadow-xs"
         }
       >
         <ChatAnswer content={message.content} />
 
         {!!message.doctors?.length && (
-          <div className="mt-3 space-y-2 border-t pt-2.5">
-            <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+          <div className="mt-2.5 space-y-1.5 border-t border-slate-100 pt-2">
+            <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
               Recommended Specialists
             </p>
             {message.doctors.map((doctor) => (
               <Link
                 key={doctor.id}
                 href={`/doctors/${doctor.id}`}
-                className="group flex items-center justify-between gap-2 rounded-xl border bg-slate-50/80 p-2.5 text-card-foreground transition-all hover:border-primary/40 hover:bg-primary/5"
+                className="group flex items-center justify-between gap-2 rounded-md border border-slate-200 bg-slate-50 p-2 transition-colors hover:border-slate-300 hover:bg-white"
               >
                 <div className="min-w-0">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-900">
-                    <Stethoscope className="size-3.5 shrink-0 text-primary" />
+                  <span className="flex items-center gap-1 font-semibold text-slate-900 text-[11px]">
+                    <Stethoscope className="size-3 shrink-0 text-slate-600" />
                     <span className="truncate">{doctor.name}</span>
                   </span>
-                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                  <span className="block font-mono text-[10px] tabular-nums text-slate-500">
                     {doctor.specialization}
                     {doctor.consultationFee
-                      ? ` • ৳${Number(doctor.consultationFee).toLocaleString()}`
+                      ? ` • ৳ ${Number(doctor.consultationFee).toLocaleString()}`
                       : ""}
                   </span>
                 </div>
-                <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                <ArrowRight className="size-3.5 shrink-0 text-slate-400 group-hover:text-slate-900" />
               </Link>
             ))}
           </div>
@@ -316,8 +320,8 @@ function ChatAnswer({ content }: { content: string }) {
     <div className="whitespace-pre-wrap break-words leading-relaxed">
       {content.split(/\*\*(.+?)\*\*/g).map((part, index) =>
         index % 2 === 1 ? (
-          // biome-ignore lint/suspicious/noArrayIndexKey: static text segments never reorder
-          <strong key={index} className="font-semibold">
+          // biome-ignore lint/suspicious/noArrayIndexKey: static segments
+          <strong key={index} className="font-semibold text-slate-900">
             {part}
           </strong>
         ) : (

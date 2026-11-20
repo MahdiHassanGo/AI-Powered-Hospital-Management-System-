@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CreateScheduleForm from "@/components/form/create-schedule-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
 
 export default function ScheduleCreateDialog() {
   const [open, setOpen] = useState(false);
